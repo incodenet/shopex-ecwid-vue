@@ -10,8 +10,8 @@ export const palette = {
     secondary: '#FFE7E7'
   },
   success: {
-    primary: '#4c822a',
-    secondary: '#4c822a033'
+    primary: '#79e733',
+    secondary: '#79e733033'
   },
   info: {
     primary: '#4A8EF3',

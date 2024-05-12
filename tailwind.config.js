@@ -69,6 +69,9 @@ export default {
         lg: '1028px',
         xl: '1440px',
         xxl: '1600px'
+      },
+      gridTemplateColumns: {
+        card: 'repeat(auto-fill, minmax(280px, 1fr))'
       }
     }
   },

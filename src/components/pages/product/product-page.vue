@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import IconShoppingCart from '../../icons/IocnShoppingCart.vue'
 import ProductSkeleton from './product-skeleton.vue'
-import image from '@/assets/img/not-found.png'
+import notFound from '@/assets/img/not-found.png'
 </script>
 <script lang="ts">
-import './product.styles.css'
 import 'vue3-carousel/dist/carousel.css'
 import { defineComponent } from 'vue'
 import { Carousel, Slide } from 'vue3-carousel'
@@ -19,11 +17,10 @@ export default defineComponent({
     currentSlide: 0
   }),
   computed: {
-    ...mapGetters(['currentProduct', 'isProductsLoading'])
+    ...mapGetters(['currentProduct', 'categories', 'isProductsLoading'])
   },
   methods: {
     slideTo(val: number) {
-      console.log(val)
       this.currentSlide = val
     }
   },
@@ -40,11 +37,21 @@ export default defineComponent({
     <ProductSkeleton v-if="isProductsLoading" />
     <div class="flex flex-wrap justify-center gap-2" v-else-if="!currentProduct">
       <h2 class="text-lg w-full text-center mb-[5%]">Товар не найден...</h2>
-      <img :src="image" width="300" />
+      <img :src="notFound" class="max-w-[300px]" />
     </div>
 
-    <div class="inline-flex align-start gap-6 mt-4 mb-[4%]" v-else>
-      <div class="max-w-[50%] flex-[0_0_50%]">
+    <div class="row flex flex-wrap align-start mt-4 mb-[4%]" v-else>
+      <div class="w-full column">
+        <div class="mb-6 text-md">
+          <router-link to="/" class="hover:underline">Главная</router-link>
+
+          {{
+            `${currentProduct.categories.length ? `/ ${categories.filter((c) => c.id === currentProduct.categories[0]?.id)[0]?.name}` : ''}` ||
+            ''
+          }}
+        </div>
+      </div>
+      <div class="w-full md:max-w-[50%] md:flex-[0_0_50%] column">
         <div class="card-content white-text">
           <Carousel
             id="gallery"
@@ -78,7 +85,7 @@ export default defineComponent({
         </div>
       </div>
 
-      <div class="max-w-[40%]">
+      <div class="w-full md:max-w-[40%] md:flex-[0_0_40%] column">
         <div class="mb-5">
           <div class="flex items-center justify-between gap-4">
             <h1 class="text-lg font-bold">{{ currentProduct.name.replace('ОБРАЗЕЦ.', '') }}</h1>
@@ -111,7 +118,7 @@ export default defineComponent({
         <div>
           <div
             class="bg-success font-medium min-h-[42px] flex items-center justify-center gap-2 rounded-[8px] transition-all hover:opacity-[0.9] cursor-pointer">
-            <IconShoppingCart class="w-[20px]" />
+            <v-icon name="bi-cart-plus-fill" :scale="1.4" />
             Купить
           </div>
         </div>

@@ -1,6 +1,15 @@
 <script setup lang="ts">
-import BrandLogo from '../../icons/IconMainLogo.vue'
-import IconShoppingCart from '../../icons/IocnShoppingCart.vue'
+import { palette } from '@/constants'
+import BrandLogo from '@/components/icons/IconMainLogo.vue'
+</script>
+<script lang="ts">
+import { mapGetters } from 'vuex'
+
+export default {
+  computed: {
+    ...mapGetters(['items'])
+  }
+}
 </script>
 
 <template>
@@ -14,9 +23,14 @@ import IconShoppingCart from '../../icons/IocnShoppingCart.vue'
       <RouterLink to="/cart" class="inline-block relative">
         <span
           class="min-w-[20px] bg-danger rounded-sm text-white inline-block text-center bold text-sm absolute top-[-8px] right-[-8px]">
-          1
+          {{ items?.length }}
         </span>
-        <IconShoppingCart class="w-[30px]" />
+        <v-icon
+          name="bi-cart4"
+          :scale="1.8"
+          :fill="palette.info.primary"
+          :hover="true"
+          class="hover:text-success-secondary" />
       </RouterLink>
     </nav>
   </header>

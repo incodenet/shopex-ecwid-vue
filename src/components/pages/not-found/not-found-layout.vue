@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import image from '@/assets/img/page-not-found.png'
+import pageNotFound from '@/assets/img/page-not-found.png'
 </script>
 
 <template>
@@ -10,6 +10,6 @@ import image from '@/assets/img/page-not-found.png'
         <div class="bold text-md">В главную</div>
       </RouterLink>
     </div>
-    <img :src="image" width="300" />
+    <img :src="pageNotFound" class="max-w-[300px]" />
   </div>
 </template>

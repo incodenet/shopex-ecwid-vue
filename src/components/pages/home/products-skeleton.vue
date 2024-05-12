@@ -1,5 +1,5 @@
 <template>
-  <section class="grid grid-cols-4 max-w-[1200px] mx-auto gap-x-6 gap-y-4 mt-4 mb-[4%]">
+  <section class="grid grid-cols-card max-w-[1200px] mx-auto gap-x-6 gap-y-4 mt-4 mb-[4%]">
     <div
       v-for="i in new Array(4)"
       :key="i"

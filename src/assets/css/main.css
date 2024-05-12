@@ -52,3 +52,13 @@ body {
   animation: pulse 1s cubic-bezier(0.4, 0, 0.6, 1) 5;
   animation-fill-mode: none;
 }
+
+.column {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.row {
+  margin-left: -15px;
+  margin-right: -15px;
+}

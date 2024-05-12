@@ -1,7 +1,9 @@
 import { createStore } from 'vuex'
-import { categories } from './categories'
+
 import type { IAppState } from './types'
 import { products } from './products'
+import { categories } from './categories'
+import { cart } from './cart'
 
 export default createStore<IAppState>({
   state: { error: null } as IAppState,
@@ -17,5 +19,5 @@ export default createStore<IAppState>({
     }
   },
   actions: {},
-  modules: { categories, products }
+  modules: { categories, products, cart }
 })

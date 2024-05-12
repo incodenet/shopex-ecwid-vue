@@ -14,3 +14,9 @@ export interface IProductsState extends IAppState {
   isProductsLoading: boolean
   currentProduct: TProduct | null
 }
+
+export interface ICartState extends IAppState {
+  items: TProduct[]
+  isCartLoading: boolean
+  checkoutState: 'success' | 'error' | null
+}

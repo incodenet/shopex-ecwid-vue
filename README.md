@@ -1,6 +1,6 @@
-# .
+#
 
-This template should help get you started developing with Vue 3 in Vite.
+View demo in
 
 ## Recommended IDE Setup
 

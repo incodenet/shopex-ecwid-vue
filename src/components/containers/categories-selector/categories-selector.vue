@@ -34,7 +34,13 @@ export default {
 
 <template>
   <CategoriesSkeleton v-if="isCategoriesLoading" />
-
+  <div
+    v-else-if="!isCategoriesLoading && !categories.length"
+    class="flex flex-wrap justify-center gap-2 mt-4">
+    <div class="w-full text-center mb-[1%]">
+      <h2 class="text-lg">Категории не найдены...</h2>
+    </div>
+  </div>
   <section v-else class="flex max-w-[1200px] gap-6 mx-auto justify-center mt-4 sticky">
     <div
       v-for="c in categories"
@@ -43,7 +49,7 @@ export default {
       @click="onCategoryChange(c.id)">
       <div
         class="transition-shadow text-center p-1 border rounded-sm"
-        :class="selectedCategoryId === c.id ? 'shadow-lg' : ''">
+        :class="selectedCategoryId === c.id ? 'shadow-lg border border-success' : ''">
         <img :src="c.thumbnailUrl" alt="" class="max-w-[70px]" />
       </div>
       <span :class="selectedCategoryId === c.id ? 'font-bold' : ''">

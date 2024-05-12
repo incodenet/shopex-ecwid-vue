@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import BrandLogo from '../../icons/IconMainLogo.vue'
-import IconVue from '../../icons/IconVue.vue'
+import BrandLogo from '@/components/icons/IconMainLogo.vue'
 </script>
 
 <template>
@@ -9,11 +8,14 @@ import IconVue from '../../icons/IconVue.vue'
       <div><BrandLogo class="w-[35px]" /></div>
       <div class="bold text-md">Shopex</div>
     </RouterLink>
-    <div class="text-sm">© 2024 · SVG Repo LLC</div>
+    <div class="text-sm">© 2024 · Lightspeed · Ecwid</div>
     <div class="flex gap-2 items-center text-sm">
       Powered by
       <a href="https://vuejs.org/" target="_blank" rel="noopener">
-        <IconVue class="w-[30px]" />
+        <v-icon name="vi-file-type-vue" />
+      </a>
+      <a href="https://github.com/incodenet/shopex-ecwid-vue" target="_blank" rel="noopener">
+        <v-icon name="bi-github" />
       </a>
     </div>
   </footer>
