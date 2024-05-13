@@ -1,5 +1,5 @@
 <template>
-  <section class="flex max-w-[1200px] gap-6 mx-auto justify-center mt-4">
+  <section class="flex max-w-[1200px] gap-6 mx-auto justify-center mt-7 mb-7">
     <div
       class="cursor-pointer text-center [&>div]:hover:shadow-lg"
       v-for="i in new Array(1)"

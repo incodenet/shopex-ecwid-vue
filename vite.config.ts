@@ -7,7 +7,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/shopex-ecwid',
+  base: 'dist',
   plugins: [vue(), vueJsx(), viteSingleFile()],
   server: {
     port: 5173,

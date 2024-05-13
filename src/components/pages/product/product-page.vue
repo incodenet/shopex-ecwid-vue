@@ -37,7 +37,7 @@ export default defineComponent({
     <ProductSkeleton v-if="isProductsLoading" />
     <div class="flex flex-wrap justify-center gap-2" v-else-if="!currentProduct">
       <h2 class="text-lg w-full text-center mb-[5%]">Товар не найден...</h2>
-      <img :src="notFound" class="max-w-[300px]" />
+      <img :src="notFound" class="max-w-[300px] w-full" />
     </div>
 
     <div class="row flex flex-wrap align-start mt-4 mb-[4%]" v-else>
@@ -46,12 +46,11 @@ export default defineComponent({
           <router-link to="/" class="hover:underline">Главная</router-link>
 
           {{
-            `${currentProduct.categories.length ? `/ ${categories.filter((c) => c.id === currentProduct.categories[0]?.id)[0]?.name}` : ''}` ||
-            ''
+            `/ ${categories.filter((c) => c.id === currentProduct.categories[0]?.id)[0]?.name || currentProduct.name.replace('ОБРАЗЕЦ.', '')}`
           }}
         </div>
       </div>
-      <div class="w-full md:max-w-[50%] md:flex-[0_0_50%] column">
+      <div class="w-full md:max-w-[50%] lg:flex-[0_0_50%] column">
         <div class="card-content white-text">
           <Carousel
             id="gallery"
@@ -85,7 +84,7 @@ export default defineComponent({
         </div>
       </div>
 
-      <div class="w-full md:max-w-[40%] md:flex-[0_0_40%] column">
+      <div class="w-full md:max-w-[50%] lg:flex-[0_0_40%] column">
         <div class="mb-5">
           <div class="flex items-center justify-between gap-4">
             <h1 class="text-lg font-bold">{{ currentProduct.name.replace('ОБРАЗЕЦ.', '') }}</h1>

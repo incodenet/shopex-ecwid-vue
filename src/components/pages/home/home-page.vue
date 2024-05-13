@@ -32,14 +32,14 @@ export default {
   <ProductsSkeleton v-if="isProductsLoading" />
   <div
     v-else-if="!isProductsLoading && !products.length"
-    class="flex flex-wrap justify-center gap-2 mt-4">
+    class="flex flex-wrap justify-center gap-2 mt-4 px-3">
     <div class="w-full text-center mb-[1%]">
       <h2 class="text-lg">Продукты не найдены...</h2>
     </div>
-    <img :src="notFound" class="max-w-[300px]" />
+    <img :src="notFound" class="max-w-[300px] w-full" />
   </div>
 
-  <section v-else class="max-w-[1200px] mx-auto mt-4 mb-[4%]">
+  <section v-else class="max-w-[1200px] mx-auto mb-[4%]">
     <div class="grid grid-cols-card gap-y-4 gap-x-6">
       <router-link
         v-for="p in products"

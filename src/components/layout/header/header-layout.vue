@@ -22,6 +22,7 @@ export default {
     <nav>
       <RouterLink to="/cart" class="inline-block relative">
         <span
+          v-if="items?.length"
           class="min-w-[20px] bg-danger rounded-sm text-white inline-block text-center bold text-sm absolute top-[-8px] right-[-8px]">
           {{ items?.length }}
         </span>

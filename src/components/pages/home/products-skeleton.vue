@@ -1,9 +1,6 @@
 <template>
   <section class="grid grid-cols-card max-w-[1200px] mx-auto gap-x-6 gap-y-4 mt-4 mb-[4%]">
-    <div
-      v-for="i in new Array(4)"
-      :key="i"
-      class="block p-2 rounded-sm hover:shadow-light bg-white">
+    <div v-for="i in new Array(4)" :key="i" class="block p-2 rounded-sm bg-white">
       <div class="rounded-sm overflow-hiddein mb-1 min-h-[270px] skeleton"></div>
       <div class="grid gap-2">
         <strong class="skeleton rounded-[8px] min-h-[15px]"></strong>
