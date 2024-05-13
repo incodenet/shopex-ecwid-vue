@@ -13,7 +13,7 @@
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.js,.jsx,.ts,.tsx --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
-    "predeploy": "vite buld",
+    "predeploy": "vite build",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
