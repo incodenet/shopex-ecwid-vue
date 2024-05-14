@@ -58,8 +58,8 @@ export default defineComponent({
   <div class="max-w-[1200px] mx-auto p-5">
     <ProductSkeleton v-if="isProductsLoading" />
     <div class="flex flex-wrap justify-center gap-2" v-else-if="!currentProduct">
-      <h2 class="text-lg w-full text-center mb-[5%]">Товар не найден...</h2>
-      <img :src="notFound" class="max-w-[300px] w-full" />
+      <h2 class="text-lg w-full text-center mb-[5%]">{{ $t('errors.productNotFound') }}</h2>
+      <img :src="notFound" class="max-w-[500px] w-full" />
     </div>
 
     <div class="row flex flex-wrap align-start mt-4 mb-[4%]" v-else>
@@ -70,7 +70,7 @@ export default defineComponent({
             :scale="1.5"
             class="cursor-pointer mr-1 hover:fill-primary transition-all"
             @click="goBack" />
-          <router-link to="/" class="hover:underline">Главная</router-link>
+          <router-link to="/" class="hover:underline">{{ $t('links.home') }}</router-link>
 
           {{
             `/ ${categories.filter((c) => c.id === currentProduct.categories[0]?.id)[0]?.name || currentProduct.name.replace('ОБРАЗЕЦ.', '')}`
@@ -131,11 +131,8 @@ export default defineComponent({
               <div
                 v-for="(choise, i) in option.choices"
                 :key="choise"
-                class="shadow-sm border rounded-[4px] min-w-[40px] min-h-[40px] leading-[40px] text-center cursor-pointer text-md font-bold"
-                :class="[
-                  option.defaultChoice === i ? 'border-success' : '',
-                  i === 0 ? '' : 'cursor-not-allowed'
-                ]">
+                class="shadow-sm border rounded-[4px] min-w-[40px] min-h-[40px] leading-[40px] text-center text-md font-bold cursor-not-allowed"
+                :class="[option.defaultChoice === i ? 'border-success' : '']">
                 <div>
                   {{ choise.text }}
                 </div>
@@ -151,7 +148,7 @@ export default defineComponent({
             <v-icon
               :name="currentProduct.id === productId ? 'md-done' : 'bi-cart-plus-fill'"
               :scale="1.4" />
-            В корзину
+            {{ $t('buttons.toCart') }}
           </div>
         </div>
       </div>

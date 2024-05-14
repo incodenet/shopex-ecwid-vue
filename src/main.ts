@@ -5,6 +5,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import { OhVueIcon, addIcons } from 'oh-vue-icons'
+import { createI18n } from 'vue-i18n'
 
 import {
   ViFileTypeVue,
@@ -17,6 +18,7 @@ import {
   MdDone,
   MdChevronleft
 } from 'oh-vue-icons/icons'
+import { messages } from './constants'
 
 addIcons(
   ViFileTypeVue,
@@ -30,9 +32,17 @@ addIcons(
   MdChevronleft
 )
 
+const i18n = createI18n({
+  globalInjection: true,
+  locale: 'ru',
+  fallbackLocale: 'ru',
+  legacy: false,
+  messages
+})
+
 const app = createApp(App)
 
-app.use(router).use(store)
+app.use(router).use(store).use(i18n)
 app.component('v-icon', OhVueIcon)
 
 app.mount('#app')

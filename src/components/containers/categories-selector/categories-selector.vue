@@ -11,6 +11,7 @@ interface IState {
 }
 
 export default {
+  name: 'categories-selector',
   data: (): IState => ({
     selectedCategoryId: null
   }),
@@ -55,7 +56,7 @@ export default {
     v-else-if="!isCategoriesLoading && !categories.length"
     class="flex flex-wrap justify-center gap-2 mt-4 px-3">
     <div class="w-full text-center mb-[1%]">
-      <h2 class="text-lg">Категории не найдены...</h2>
+      <h2 class="text-lg">{{ $t('errors.categoriesNotFound') }}</h2>
     </div>
   </div>
   <section v-else class="flex justify-center max-w-[1200px] px-[10px] mx-auto mt-7 mb-7">

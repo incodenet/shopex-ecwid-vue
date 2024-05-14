@@ -54,13 +54,13 @@ export default defineComponent({
     <div
       class="flex flex-wrap justify-center gap-2"
       v-else-if="!isLoading && !shoppingCartItems.length">
-      <h2 class="text-lg w-full text-center mb-[5%]">Корзина пока пуста...</h2>
+      <h2 class="text-lg w-full text-center mb-[5%]">{{ $t('errors.cartIsEmpty') }}</h2>
       <img :src="emptyCart" class="max-w-[500px] w-full" />
     </div>
 
     <div class="flex flex-wrap align-start md:mt-4 mb-[4%] row" v-else>
       <div class="w-full column">
-        <h1 class="mb-6 text-xl font-bold">Корзина</h1>
+        <h1 class="mb-6 text-xl font-bold">{{ $t('pages.cart') }}</h1>
       </div>
       <div class="max-w-[100%] flex-[0_0_100%] lg:max-w-[75%] lg:flex-[0_0_75%] column">
         <div>
@@ -116,9 +116,12 @@ export default defineComponent({
       </div>
       <div class="max-w-[100%] flex-[0_0_100%] lg:max-w-[25%] lg:flex-[0_0_25%] column">
         <div class="shadow-light p-3 rounded-sm">
-          <div>Товары, {{ shoppingCartItems.length }} шт.</div>
+          <div>
+            <strong>{{ shoppingCartItems.length }}</strong>
+            {{ $t('labels.items') }}
+          </div>
           <div class="flex justify-between gap-2 mb-4 text-lg">
-            <strong>Итого</strong>
+            <strong>{{ $t('labels.sum') }}</strong>
             <strong>
               {{
                 shoppingCartItems
@@ -136,7 +139,7 @@ export default defineComponent({
             class="bg-success font-medium min-h-[42px] flex items-center justify-center gap-2 rounded-[8px] transition-all hover:opacity-[0.9] cursor-pointer"
             @click="placeOrder({ id: '1' })">
             <v-icon name="ri-loader-line" animation="spin" v-if="isPurchaseLoading" />
-            Заказать
+            {{ $t('buttons.order') }}
           </div>
         </div>
       </div>
