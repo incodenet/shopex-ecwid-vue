@@ -9,7 +9,14 @@ import BrandLogo from '@/components/icons/IconMainLogo.vue'
       <div><BrandLogo class="w-[35px]" /></div>
       <div class="bold text-md">Shopex</div>
     </RouterLink>
-    <div class="text-sm w-full md:w-auto text-center">© 2024 · Lightspeed · Ecwid</div>
+    <div class="text-sm w-full md:w-auto text-center">
+      © 2024 ·
+      <a href="https://www.lightspeedhq.com/" target="_blank" rel="noopener">Lightspeed</a>
+      ·
+      <a href="https://api-docs.ecwid.com/reference/overview" target="_blank" rel="noopener">
+        Ecwid
+      </a>
+    </div>
     <div class="flex gap-2 items-center text-sm justify-center md:w-auto w-full">
       Powered by
       <a href="https://vuejs.org/" target="_blank" rel="noopener">

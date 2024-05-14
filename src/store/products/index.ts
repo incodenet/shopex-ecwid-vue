@@ -1,12 +1,14 @@
+import { ProductsStateEnum } from './enums/state.enum'
 import type { Module } from 'vuex'
 import type { IProductsState } from './types'
 import { getProductByIdService, getProductsService } from '@/services/products'
+import { ProductsActionsEnum } from './enums'
 
 export const products: Module<IProductsState, {}> = {
   state: {
-    products: [],
-    isProductsLoading: false,
-    currentProduct: null
+    [ProductsStateEnum.PRODUCTS]: [],
+    [ProductsStateEnum.IS_PRODUCTS_LOADING]: false,
+    [ProductsStateEnum.CURRENT_PRODUCT]: null
   },
   getters: {
     isProductsLoading: (s: IProductsState) => s.isProductsLoading,
@@ -14,44 +16,44 @@ export const products: Module<IProductsState, {}> = {
     currentProduct: (s: IProductsState) => s.currentProduct
   },
   mutations: {
-    setProductsLoading(state, isProductsLoading) {
+    [ProductsActionsEnum.SET_PRODUCTS_LOADING](state, isProductsLoading) {
       state.isProductsLoading = isProductsLoading
     },
-    setProducts(state, products) {
+    [ProductsActionsEnum.SET_PRODUCTS](state, products) {
       state.products = products
     },
-    setCurrentProduct(state, currentProduct) {
+    [ProductsActionsEnum.SET_CURRENT_PRODUCT](state, currentProduct) {
       state.currentProduct = currentProduct
     }
   },
   actions: {
     async getProducts({ commit }, params) {
-      commit('setCurrentProduct', null)
-      commit('setProductsLoading', true)
+      commit(ProductsActionsEnum.SET_CURRENT_PRODUCT, null)
+      commit(ProductsActionsEnum.SET_PRODUCTS_LOADING, true)
 
       try {
         const { data } = await getProductsService({ ...params })
 
-        commit('setProducts', data.items)
+        commit(ProductsActionsEnum.SET_PRODUCTS, data.items)
       } catch (e) {
         console.error(e)
         throw e
       } finally {
-        commit('setProductsLoading', false)
+        commit(ProductsActionsEnum.SET_PRODUCTS_LOADING, false)
       }
     },
     async getProductById({ commit }, { id, params }) {
-      commit('setProductsLoading', true)
+      commit(ProductsActionsEnum.SET_PRODUCTS_LOADING, true)
 
       try {
         const { data } = await getProductByIdService({ id, params })
 
-        commit('setCurrentProduct', data)
+        commit(ProductsActionsEnum.SET_CURRENT_PRODUCT, data)
       } catch (e) {
         console.error(e)
         throw e
       } finally {
-        commit('setProductsLoading', false)
+        commit(ProductsActionsEnum.SET_PRODUCTS_LOADING, false)
       }
     }
   }

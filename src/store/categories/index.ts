@@ -1,37 +1,39 @@
+import { CategoriesStateEnum } from './enums/state.enum'
 import type { Module } from 'vuex'
 import type { ICategoriesState } from './types'
 import { getCategoriesService } from '@/services/categories'
+import { CategoriesActionsEnum } from './enums'
 
 export const categories: Module<ICategoriesState, {}> = {
   state: {
-    categories: [],
-    isCategoriesLoading: false
+    [CategoriesStateEnum.CATEGORIES]: [],
+    [CategoriesStateEnum.IS_CATEGORIES_LOADING]: false
   },
   getters: {
     isCategoriesLoading: (s: ICategoriesState) => s.isCategoriesLoading,
     categories: (s: ICategoriesState) => s.categories
   },
   mutations: {
-    setCategoriesLoading(state, isCategoriesLoading) {
+    [CategoriesActionsEnum.SET_CATEGORIES_LOADING](state, isCategoriesLoading) {
       state.isCategoriesLoading = isCategoriesLoading
     },
-    setCategories(state, categories) {
+    [CategoriesActionsEnum.SET_CATEGORIES](state, categories) {
       state.categories = categories
     }
   },
   actions: {
     async getCategories({ commit }, params) {
-      commit('setCategoriesLoading', true)
+      commit(CategoriesActionsEnum.SET_CATEGORIES_LOADING, true)
 
       try {
         const { data } = await getCategoriesService({ ...params })
 
-        commit('setCategories', data.items)
+        commit(CategoriesActionsEnum.SET_CATEGORIES, data.items)
       } catch (e) {
         console.error(e)
         throw e
       } finally {
-        commit('setCategoriesLoading', false)
+        commit(CategoriesActionsEnum.SET_CATEGORIES_LOADING, false)
       }
     }
   }
