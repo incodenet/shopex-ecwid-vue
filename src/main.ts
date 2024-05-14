@@ -11,10 +11,24 @@ import {
   BiGithub,
   BiCartPlusFill,
   BiCart4,
-  MdClearOutlined
+  MdClearOutlined,
+  RiLoaderLine,
+  IoCheckmarkDoneCircleSharp,
+  MdDone,
+  MdChevronleft
 } from 'oh-vue-icons/icons'
 
-addIcons(ViFileTypeVue, BiGithub, BiCartPlusFill, BiCart4, MdClearOutlined)
+addIcons(
+  ViFileTypeVue,
+  BiGithub,
+  BiCartPlusFill,
+  BiCart4,
+  MdClearOutlined,
+  RiLoaderLine,
+  IoCheckmarkDoneCircleSharp,
+  MdDone,
+  MdChevronleft
+)
 
 const app = createApp(App)
 

@@ -7,21 +7,43 @@ import 'vue3-carousel/dist/carousel.css'
 import { defineComponent } from 'vue'
 import { Carousel, Slide } from 'vue3-carousel'
 import { mapGetters } from 'vuex'
+import type { TProduct } from '@/types/api'
 
 export default defineComponent({
   components: {
     Carousel,
     Slide
   },
-  data: () => ({
-    currentSlide: 0
+  data: (): any => ({
+    currentSlide: 0,
+    productId: null
   }),
+  watch: {
+    productId() {
+      if (this.productId) {
+        this.clearProductId()
+      }
+    }
+  },
   computed: {
     ...mapGetters(['currentProduct', 'categories', 'isProductsLoading'])
   },
   methods: {
     slideTo(val: number) {
       this.currentSlide = val
+    },
+    addToCard(product: TProduct) {
+      this.$store.dispatch('addProductToCart', product)
+      this.productId = product.id
+    },
+    clearProductId() {
+      return setTimeout(() => (this.productId = null), 500)
+    },
+    goBack() {
+      this.$router.go(-1)
+    },
+    beforeDestroy() {
+      clearTimeout(this.clearProductId())
     }
   },
   async mounted() {
@@ -43,6 +65,11 @@ export default defineComponent({
     <div class="row flex flex-wrap align-start mt-4 mb-[4%]" v-else>
       <div class="w-full column">
         <div class="mb-6 text-md">
+          <v-icon
+            name="md-chevronleft"
+            :scale="1.5"
+            class="cursor-pointer mr-1 hover:fill-primary transition-all"
+            @click="goBack" />
           <router-link to="/" class="hover:underline">Главная</router-link>
 
           {{
@@ -105,7 +132,10 @@ export default defineComponent({
                 v-for="(choise, i) in option.choices"
                 :key="choise"
                 class="shadow-sm border rounded-[4px] min-w-[40px] min-h-[40px] leading-[40px] text-center cursor-pointer text-md font-bold"
-                :class="option.defaultChoice === i ? 'border-success' : ''">
+                :class="[
+                  option.defaultChoice === i ? 'border-success' : '',
+                  i === 0 ? '' : 'cursor-not-allowed'
+                ]">
                 <div>
                   {{ choise.text }}
                 </div>
@@ -116,9 +146,12 @@ export default defineComponent({
         <hr class="my-5" v-if="currentProduct.options.length" />
         <div>
           <div
-            class="bg-success font-medium min-h-[42px] flex items-center justify-center gap-2 rounded-[8px] transition-all hover:opacity-[0.9] cursor-pointer">
-            <v-icon name="bi-cart-plus-fill" :scale="1.4" />
-            Купить
+            class="bg-success font-medium min-h-[42px] flex items-center justify-center gap-2 rounded-[8px] transition-all hover:opacity-[0.9] cursor-pointer"
+            @click.prevent="addToCard(currentProduct)">
+            <v-icon
+              :name="currentProduct.id === productId ? 'md-done' : 'bi-cart-plus-fill'"
+              :scale="1.4" />
+            В корзину
           </div>
         </div>
       </div>

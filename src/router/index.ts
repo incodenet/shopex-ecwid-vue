@@ -3,23 +3,24 @@ import HomePage from '@/components/pages/home/home-page.vue'
 import ProductPage from '@/components/pages/product/product-page.vue'
 import ShoppingCartPage from '@/components/pages/shopping-cart/shopping-cart-page.vue'
 import { createRouter, createWebHistory } from 'vue-router'
+import { routePaths } from './constants'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
+      path: routePaths.home,
       name: 'home',
       component: HomePage
       // component: () => import('../pages/HomePage.vue')
     },
     {
-      path: '/product/:id',
+      path: `${routePaths.product}/:id`,
       name: 'product',
       component: ProductPage
     },
     {
-      path: '/cart',
+      path: routePaths.cart,
       name: 'cart',
       component: ShoppingCartPage
     },

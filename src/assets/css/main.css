@@ -33,23 +33,35 @@ body {
 @keyframes pulse {
   0% {
     color: transparent;
-    background: rgb(248, 248, 248);
+    background: rgb(241, 241, 241);
     opacity: 0.9;
-  }
-
-  50% {
-    opacity: 1;
   }
 
   100% {
     color: transparent;
     background: rgb(228, 228, 228);
-    opacity: 0.9;
+    opacity: 1;
+  }
+}
+
+@keyframes toast {
+  from {
+    transform: translate(-50%, 100%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
   }
 }
 
 .skeleton {
-  animation: pulse 1s cubic-bezier(0.4, 0, 0.6, 1) 5;
+  animation: pulse 0.5s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate;
+  animation-fill-mode: none;
+}
+
+.toast {
+  animation: toast 0.5s cubic-bezier(0.4, 0, 0.6, 1) 1;
   animation-fill-mode: none;
 }
 

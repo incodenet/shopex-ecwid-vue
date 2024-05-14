@@ -3,7 +3,7 @@ import { createStore } from 'vuex'
 import type { IAppState } from './types'
 import { products } from './products'
 import { categories } from './categories'
-import { cart } from './cart'
+import { cart } from './shopping-cart'
 
 export default createStore<IAppState>({
   state: { error: null } as IAppState,

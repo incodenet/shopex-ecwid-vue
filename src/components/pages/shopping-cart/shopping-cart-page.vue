@@ -15,26 +15,45 @@ export default defineComponent({
     ShoppingCartSkeleton
   },
   data: () => ({
-    currentSlide: 0
+    isPurchaseLoading: false,
+    isLoading: true
   }),
   computed: {
-    ...mapGetters(['items', 'isCartLoading'])
+    ...mapGetters(['shoppingCartItems', 'isShoppingCartLoading'])
   },
   methods: {
-    placeOrder(val: number) {
-      this.currentSlide = val
+    disableLoading() {
+      return setTimeout(() => {
+        this.isPurchaseLoading = false
+        this.isLoading = false
+      }, 1500)
+    },
+    placeOrder(details: Record<string, any>) {
+      this.isPurchaseLoading = true
+
+      this.$store.dispatch('proccessToCheckout', details)
+
+      this.disableLoading()
     },
     removeProduct(id: number) {
       this.$store.dispatch('removeProductFromCart', id)
+    },
+    beforeDestroy() {
+      clearTimeout(this.disableLoading())
     }
+  },
+  mounted() {
+    this.disableLoading()
   }
 })
 </script>
 
 <template>
   <div class="max-w-[1200px] mx-auto p-3 md:p-5">
-    <shopping-cart-skeleton v-if="isCartLoading" />
-    <div class="flex flex-wrap justify-center gap-2" v-else-if="!isCartLoading && !items.length">
+    <shopping-cart-skeleton v-if="isLoading" />
+    <div
+      class="flex flex-wrap justify-center gap-2"
+      v-else-if="!isLoading && !shoppingCartItems.length">
       <h2 class="text-lg w-full text-center mb-[5%]">Корзина пока пуста...</h2>
       <img :src="emptyCart" class="max-w-[500px] w-full" />
     </div>
@@ -46,7 +65,7 @@ export default defineComponent({
       <div class="max-w-[100%] flex-[0_0_100%] lg:max-w-[75%] lg:flex-[0_0_75%] column">
         <div>
           <div
-            v-for="product in items"
+            v-for="product in shoppingCartItems"
             :key="product.id"
             class="flex flex-wrap gap-5 shadow-light rounded-sm mb-5 relative">
             <div class="max-w-[100%] flex-[0_0_100%] md:max-w-[200px] md:flex-[0_0_200px]">
@@ -63,13 +82,17 @@ export default defineComponent({
               </Carousel>
             </div>
             <div class="flex-1 px-3 pb-3">
-              <div class="flex justify-between gap-2 mt-2">
-                <h2 class="text-md font-bold">{{ product.name.replace('ОБРАЗЕЦ.', '') }}</h2>
+              <div class="flex justify-between gap-2 mt-3">
+                <h2 class="text-md font-bold hover:text-primary cursor-pointer">
+                  <router-link :to="`/product/${product.id}`">
+                    {{ product.name.replace('ОБРАЗЕЦ.', '') }}
+                  </router-link>
+                </h2>
                 <strong class="text-md text-primary whitespace-nowrap">
                   {{ product.defaultDisplayedPriceFormatted }}
                 </strong>
               </div>
-              <hr class="my-4" />
+              <hr class="my-3" />
               <p v-html="product.description" class="text-base line-clamp-2"></p>
               <div class="flex gap-2">
                 <div
@@ -86,19 +109,19 @@ export default defineComponent({
             <div
               @click="removeProduct(product.id)"
               class="cursor-pointer absolute top-0 right-0 md:top-[-15px] md:right-[-15px] bg-white border rounded-full p-0.5">
-              <v-icon name="md-clear-outlined" :scale="1.2" class="hover:text-danger" />
+              <v-icon name="md-clear-outlined" :scale="1" class="hover:text-danger" />
             </div>
           </div>
         </div>
       </div>
       <div class="max-w-[100%] flex-[0_0_100%] lg:max-w-[25%] lg:flex-[0_0_25%] column">
         <div class="shadow-light p-3 rounded-sm">
-          <div>Товары, {{ items.length }} шт.</div>
+          <div>Товары, {{ shoppingCartItems.length }} шт.</div>
           <div class="flex justify-between gap-2 mb-4 text-lg">
             <strong>Итого</strong>
             <strong>
               {{
-                items
+                shoppingCartItems
                   .map((it) => it.price)
                   .reduce((a, b) => {
                     return a + b
@@ -110,7 +133,9 @@ export default defineComponent({
             </strong>
           </div>
           <div
-            class="bg-success font-medium min-h-[42px] flex items-center justify-center gap-2 rounded-[8px] transition-all hover:opacity-[0.9] cursor-pointer">
+            class="bg-success font-medium min-h-[42px] flex items-center justify-center gap-2 rounded-[8px] transition-all hover:opacity-[0.9] cursor-pointer"
+            @click="placeOrder({ id: 'dd' })">
+            <v-icon name="ri-loader-line" animation="spin" v-if="isPurchaseLoading" />
             Заказать
           </div>
         </div>

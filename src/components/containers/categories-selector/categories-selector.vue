@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import router from '@/router'
 import CategoriesSkeleton from './categories-skeleton.vue'
 </script>
 
@@ -24,10 +25,25 @@ export default {
   },
   methods: {
     onCategoryChange(val: number | null) {
-      this.selectedCategoryId = this.selectedCategoryId === val ? null : val
+      const selectedCategoryId = this.selectedCategoryId === val ? null : val
+
+      this.selectedCategoryId = selectedCategoryId
+
+      if (selectedCategoryId) {
+        router.push({
+          path: '/',
+          query: { category: selectedCategoryId }
+        })
+      } else {
+        this.$router.replace({ query: undefined })
+      }
     }
   },
   async mounted() {
+    if (this.$route.query.category) {
+      this.selectedCategoryId = Number(this.$route.query.category)
+    }
+
     await this.$store.dispatch('getCategories')
   }
 }

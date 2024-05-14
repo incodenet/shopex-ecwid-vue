@@ -7,7 +7,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters(['items'])
+    ...mapGetters(['shoppingCartItems'])
   }
 }
 </script>
@@ -22,9 +22,9 @@ export default {
     <nav>
       <RouterLink to="/cart" class="inline-block relative">
         <span
-          v-if="items?.length"
+          v-if="shoppingCartItems?.length"
           class="min-w-[20px] bg-danger rounded-sm text-white inline-block text-center bold text-sm absolute top-[-8px] right-[-8px]">
-          {{ items?.length }}
+          {{ shoppingCartItems?.length }}
         </span>
         <v-icon
           name="bi-cart4"
