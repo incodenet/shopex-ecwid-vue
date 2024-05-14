@@ -1,7 +1,13 @@
 <script lang="ts">
+import type { PropType } from 'vue'
+import PButton from '../button/p-button.vue'
+import type { TProduct } from '@/types/api'
 export default {
-  name: 'product-card',
-  props: ['product'],
+  components: { PButton },
+  name: 'p-product-card',
+  props: {
+    product: Object as PropType<TProduct>
+  },
   data: (): any => ({
     productId: null
   }),
@@ -44,12 +50,11 @@ export default {
       <h2 class="font-medium">
         {{ product.name.replace('ОБРАЗЕЦ.', '') }}
       </h2>
-      <div
-        class="bg-success font-medium min-h-[36px] flex items-center justify-center gap-2 rounded-[8px] mt-1 transition-all hover:opacity-[0.9] cursor-pointer"
-        @click.prevent="addToCard(product)">
-        <v-icon :name="product.id === productId ? 'md-done' : 'bi-cart-plus-fill'" :scale="1.4" />
-        {{ $t('buttons.toCart') }}
-      </div>
+      <p-button :text="$t('buttons.toCart')" @click.prevent="addToCard(product)">
+        <template #prefix>
+          <v-icon :name="product.id === productId ? 'md-done' : 'bi-cart-plus-fill'" :scale="1.4" />
+        </template>
+      </p-button>
     </div>
   </router-link>
 </template>

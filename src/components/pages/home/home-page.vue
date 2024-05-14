@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import CategoriesSelector from '@/components/containers/categories-selector/categories-selector.vue'
-import ProductCard from '@/components/primitives/product-card/product-card.vue'
+import PProductCard from '@/components/primitives/product-card/p-product-card.vue'
 import ProductsSkeleton from './products-skeleton.vue'
 import notFound from '@/assets/img/not-found.png'
 </script>
@@ -12,7 +12,6 @@ export default {
   computed: {
     ...mapGetters(['products', 'isProductsLoading', 'checkoutState'])
   },
-
   methods: {
     addToCard(product: TProduct) {
       this.$store.dispatch('addProductToCart', product)
@@ -20,7 +19,6 @@ export default {
     clearCheckoutStatus() {
       return setTimeout(() => this.$store.dispatch('clearCheckoutState'), 3000)
     },
-
     beforeDestroy() {
       clearTimeout(this.clearCheckoutStatus())
     }
@@ -34,7 +32,7 @@ export default {
   },
   components: {
     CategoriesSelector,
-    ProductCard
+    PProductCard
   }
 }
 </script>
@@ -53,10 +51,9 @@ export default {
   </div>
   <section v-else class="max-w-[1200px] mx-auto mb-[4%]">
     <div class="grid grid-cols-card gap-y-1 gap-x-6">
-      <product-card v-for="p in products" :key="p.id" :value="p.id" :product="p" />
+      <p-product-card v-for="p in products" :key="p.id" :value="p.id" :product="p" />
     </div>
   </section>
-
   <div
     class="fixed bottom-0 md:bottom-5 left-[50%] translate-x-[-50%] md:max-w-[98%] rounded-sm z-10 px-5 py-3 shadow-light flex items-center gap-2 toast bg-white w-full md:w-auto"
     v-if="checkoutState === 'success'">

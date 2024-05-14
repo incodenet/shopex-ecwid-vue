@@ -8,6 +8,7 @@ import { defineComponent } from 'vue'
 import { Carousel, Slide } from 'vue3-carousel'
 import { mapGetters } from 'vuex'
 import type { TProduct } from '@/types/api'
+import PButton from '@/components/primitives/button/p-button.vue'
 
 export default defineComponent({
   components: {
@@ -142,14 +143,16 @@ export default defineComponent({
         </div>
         <hr class="my-5" v-if="currentProduct.options.length" />
         <div>
-          <div
-            class="bg-success font-medium min-h-[42px] flex items-center justify-center gap-2 rounded-[8px] transition-all hover:opacity-[0.9] cursor-pointer"
+          <p-button
+            size="large"
+            :text="$t('buttons.toCart')"
             @click.prevent="addToCard(currentProduct)">
-            <v-icon
-              :name="currentProduct.id === productId ? 'md-done' : 'bi-cart-plus-fill'"
-              :scale="1.4" />
-            {{ $t('buttons.toCart') }}
-          </div>
+            <template #prefix>
+              <v-icon
+                :name="currentProduct.id === productId ? 'md-done' : 'bi-cart-plus-fill'"
+                :scale="1.4" />
+            </template>
+          </p-button>
         </div>
       </div>
     </div>
