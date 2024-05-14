@@ -1,6 +1,6 @@
 #
 
-View demo in
+View demo in https://incodenet.github.io/shopex-ecwid-vue/
 
 ## Recommended IDE Setup
 

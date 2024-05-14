@@ -134,7 +134,7 @@ export default defineComponent({
           </div>
           <div
             class="bg-success font-medium min-h-[42px] flex items-center justify-center gap-2 rounded-[8px] transition-all hover:opacity-[0.9] cursor-pointer"
-            @click="placeOrder({ id: 'dd' })">
+            @click="placeOrder({ id: '1' })">
             <v-icon name="ri-loader-line" animation="spin" v-if="isPurchaseLoading" />
             Заказать
           </div>
