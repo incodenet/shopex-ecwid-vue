@@ -4,10 +4,16 @@ import BrandLogo from '@/components/icons/IconMainLogo.vue'
 </script>
 <script lang="ts">
 import { mapGetters } from 'vuex'
+import { LocalesEnum } from '@/enums'
 
 export default {
   computed: {
     ...mapGetters(['shoppingCartItems'])
+  },
+  methods: {
+    changeLocale() {
+      this.$i18n.locale = this.$i18n.locale === LocalesEnum.EN ? LocalesEnum.RU : LocalesEnum.EN
+    }
   }
 }
 </script>
@@ -19,20 +25,21 @@ export default {
       <div class="bold text-xl">Shopex</div>
     </RouterLink>
 
-    <nav>
+    <div class="flex item-center gap-2">
+      <p-button :text="$i18n.locale.toUpperCase()" size="xsmall" @click="changeLocale"></p-button>
       <RouterLink to="/cart" class="inline-block relative">
         <span
           v-if="shoppingCartItems?.length"
           class="min-w-[20px] bg-danger rounded-sm text-white inline-block text-center bold text-sm absolute top-[-8px] right-[-8px]">
           {{ shoppingCartItems?.length }}
         </span>
-        <v-icon
+        <p-icon
           name="bi-cart4"
           :scale="1.8"
           :fill="palette.info.primary"
           :hover="true"
           class="hover:text-success-secondary" />
       </RouterLink>
-    </nav>
+    </div>
   </header>
 </template>

@@ -1,9 +1,7 @@
 <script lang="ts">
 import type { PropType } from 'vue'
-import PButton from '../button/p-button.vue'
 import type { TProduct } from '@/types/api'
 export default {
-  components: { PButton },
   name: 'p-product-card',
   props: {
     product: Object as PropType<TProduct>
@@ -19,7 +17,7 @@ export default {
     }
   },
   methods: {
-    addToCard(product) {
+    addToCard(product: TProduct) {
       this.$store.dispatch('addProductToCart', product)
       this.productId = product.id
     },
@@ -52,7 +50,7 @@ export default {
       </h2>
       <p-button :text="$t('buttons.toCart')" @click.prevent="addToCard(product)">
         <template #prefix>
-          <v-icon :name="product.id === productId ? 'md-done' : 'bi-cart-plus-fill'" :scale="1.4" />
+          <p-icon :name="product.id === productId ? 'md-done' : 'bi-cart-plus-fill'" :scale="1.4" />
         </template>
       </p-button>
     </div>

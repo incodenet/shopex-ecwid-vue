@@ -6,7 +6,6 @@ import 'vue3-carousel/dist/carousel.css'
 import { defineComponent } from 'vue'
 import { mapGetters } from 'vuex'
 import ShoppingCartSkeleton from './shopping-cart-skeleton.vue'
-import PButton from '@/components/primitives/button/p-button.vue'
 import PShoppingCartItem from '@/components/primitives/shopping-cart-item/p-shopping-cart-item.vue'
 import { calculateCheckoutSum } from '@/utils'
 import type { TProduct } from '@/types/api'
@@ -14,7 +13,6 @@ import type { TProduct } from '@/types/api'
 export default defineComponent({
   components: {
     ShoppingCartSkeleton,
-    PButton,
     PShoppingCartItem
   },
   data: () => ({
@@ -83,7 +81,7 @@ export default defineComponent({
           </div>
           <p-button size="large" :text="$t('buttons.order')" @click="placeOrder({ id: '1' })">
             <template #prefix>
-              <v-icon name="ri-loader-line" animation="spin" v-if="isPurchaseLoading" />
+              <p-icon name="ri-loader-line" animation="spin" v-if="isPurchaseLoading" />
             </template>
           </p-button>
         </div>

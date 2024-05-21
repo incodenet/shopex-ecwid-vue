@@ -57,7 +57,7 @@ export default {
   <div
     class="fixed bottom-0 md:bottom-5 left-[50%] translate-x-[-50%] md:max-w-[98%] rounded-sm z-10 px-5 py-3 shadow-light flex items-center gap-2 toast bg-white w-full md:w-auto"
     v-if="checkoutState === 'success'">
-    <v-icon name="io-checkmark-done-circle-sharp" :scale="1.6" fill="green" />
+    <p-icon name="io-checkmark-done-circle-sharp" :scale="1.6" fill="green" />
     {{ $t('message.purchaseSuccess') }}
   </div>
 </template>

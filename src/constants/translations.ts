@@ -34,7 +34,7 @@ export const messages = {
       cartIsEmpty: 'Корзина пока пуста...'
     },
     message: {
-      purchaseSuccess: 'Ваш заказ успешно обработан!'
+      purchaseSuccess: 'Ваш заказ успешно оформлен!'
     },
     links: {
       home: 'Главная'

@@ -8,7 +8,6 @@ import { defineComponent } from 'vue'
 import { Carousel, Slide } from 'vue3-carousel'
 import { mapGetters } from 'vuex'
 import type { TProduct } from '@/types/api'
-import PButton from '@/components/primitives/button/p-button.vue'
 
 export default defineComponent({
   components: {
@@ -66,7 +65,7 @@ export default defineComponent({
     <div class="row flex flex-wrap align-start mt-4 mb-[4%]" v-else>
       <div class="w-full column">
         <div class="mb-6 text-md">
-          <v-icon
+          <p-icon
             name="md-chevronleft"
             :scale="1.5"
             class="cursor-pointer mr-1 hover:fill-primary transition-all"
@@ -127,7 +126,7 @@ export default defineComponent({
         <div>
           <div v-for="option in currentProduct.options" :key="option">
             <div class="font-bold mb-2">{{ option.name }}</div>
-
+            <p-icon name="io-checkmark-done-circle-sharp" :scale="1.6" fill="green" />
             <div class="flex gap-2">
               <div
                 v-for="(choise, i) in option.choices"
@@ -148,7 +147,7 @@ export default defineComponent({
             :text="$t('buttons.toCart')"
             @click.prevent="addToCard(currentProduct)">
             <template #prefix>
-              <v-icon
+              <p-icon
                 :name="currentProduct.id === productId ? 'md-done' : 'bi-cart-plus-fill'"
                 :scale="1.4" />
             </template>

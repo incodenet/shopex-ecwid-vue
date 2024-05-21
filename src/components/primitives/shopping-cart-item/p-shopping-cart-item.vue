@@ -59,7 +59,7 @@ export default {
     <div
       @click="removeProduct(product.id)"
       class="cursor-pointer absolute top-0 right-0 md:top-[-15px] md:right-[-15px] bg-white border rounded-full p-0.5">
-      <v-icon name="md-clear-outlined" :scale="1" class="hover:text-danger" />
+      <p-icon name="md-clear-outlined" :scale="1" class="hover:text-danger" />
     </div>
   </div>
 </template>

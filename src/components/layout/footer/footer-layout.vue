@@ -20,10 +20,10 @@ import BrandLogo from '@/components/icons/IconMainLogo.vue'
     <div class="flex gap-2 items-center text-sm justify-center md:w-auto w-full">
       Powered by
       <a href="https://vuejs.org/" target="_blank" rel="noopener">
-        <v-icon name="vi-file-type-vue" />
+        <p-icon name="vi-file-type-vue" />
       </a>
       <a href="https://github.com/incodenet/shopex-ecwid-vue" target="_blank" rel="noopener">
-        <v-icon name="bi-github" />
+        <p-icon name="bi-github" />
       </a>
     </div>
   </footer>
